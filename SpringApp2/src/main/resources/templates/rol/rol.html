@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de Roles</div>
+			<form th:action="@{/roles/guardar}" th:object="${rol}" method="post"
+				enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idRol" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idRol}" class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombreRol" class="col-sm-2 col-form-label">Rol</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreRol}" class="form-control"
+							th:errorclass="'form-control alert-info'" /> <small
+							th:if="${#fields.hasErrors('nombreRol')}"
+							th:errors="*{nombreRol}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="descripcionRol" class="col-sm-2 col-form-label">Descripcion
+						del Rol</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{descripcionRol}"
+							class="form-control" th:errorclass="'form-control alert-info'" />
+						<small th:if="${#fields.hasErrors('descripcionRol')}"
+							th:errors="*{descripcionRol}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/roles/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<div>
+					<p th:text="${mensaje}" class="text-danger"></p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Proyectos</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CÓDIGO</td>
+								<td th:text="${proyecto.idProyecto}"></td>
+							</tr>
+							<tr>
+								<td>Proyecto</td>
+								<td th:text="${proyecto.nombreProyecto}"></td>
+							</tr>
+							<tr>
+								<td>Descripción del proyecto</td>
+								<td th:text="${proyecto.descripcionProyecto}"></td>
+							</tr>
+							<tr>
+								<td>Responsable</td>
+								<td th:text="${proyecto.usuario.nombreUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Área</td>
+								<td th:text="${proyecto.area.nombreArea}"></td>
+							</tr>
+							<tr>
+								<td>Producto</td>
+								<td th:text="${proyecto.producto.nombreProducto}"></td>
+							</tr>
+							<tr>
+								<td>Cantidad de Productos</td>
+								<td th:text="${proyecto.cantidadProducto}"></td>
+							</tr>
+							<tr>
+								<td>Fecha de Inicio</td>
+								<td
+									th:text="${#dates.format(proyecto.fechaInicio,'dd/MM/yyyy')}"></td>
+							</tr>
+							<tr>
+								<td>Fecha de Fin</td>
+								<td th:text="${#dates.format(proyecto.fechaFin,'dd/MM/yyyy')}"></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/proyectos/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+				<div class="card-body" style="text-align: right">
+					<a th:href="@{/proyectos/downloadPDF/} + ${proyecto.idProyecto}"
+						type="button" class="btn btn-primary"> Descargar </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

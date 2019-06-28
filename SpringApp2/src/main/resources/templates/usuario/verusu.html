@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Usuarios</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CÓDIGO</td>
+								<td th:text="${usuario.idUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Usuario</td>
+								<td th:text="${usuario.nombreUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Edad</td>
+								<td th:text="${usuario.edadUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td th:text="${usuario.emailUsuario}"></td>
+							</tr>
+							<tr>
+								<td>DNI</td>
+								<td th:text="${usuario.dniUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Rol</td>
+								<td th:text="${usuario.rol.nombreRol}"></td>
+							</tr>
+
+							<tr>
+								<td>Foto del usuario</td>
+								<td><img th:if="${#strings.length(usuario.fotoUsuario)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/usuarios/uploads/' + ${usuario.fotoUsuario}}"
+									th:alt="${usuario.fotoUsuario}" /></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/usuarios/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header text-black bg-blue">Registro de
+				Usuarios</div>
+			<form th:action="@{/usuarios/guardar}" th:object="${usuario}"
+				method="post" enctype="multipart/form-data">
+				<div class="form-group row">
+					<label for="idUsuario" class="col-sm-2 col-form-label">Id</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{idUsuario}" class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="nombreUsuario" class="col-sm-2 col-form-label">Usuario</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{nombreUsuario}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small th:if="${#fields.hasErrors('nombreUsuario')}"
+							th:errors="*{nombreUsuario}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="edadUsuario" class="col-sm-2 col-form-label">Edad</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{edadUsuario}" class="form-control"
+							th:errorclass="'form-control alert-danger'" maxlength="2" /> <small
+							th:if="${#fields.hasErrors('edadUsuario')}"
+							th:errors="*{edadUsuario}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="emailUsuario" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{emailUsuario}" class="form-control"
+							th:errorclass="'form-control alert-danger'" /> <small
+							th:if="${#fields.hasErrors('emailUsuario')}"
+							th:errors="*{emailUsuario}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="dniUsuario" class="col-sm-2 col-form-label">DNI</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{dniUsuario}" class="form-control"
+							th:errorclass="'form-control alert-danger'" maxlength="8" /> <small
+							th:if="${#fields.hasErrors('dniUsuario')}"
+							th:errors="*{dniUsuario}"></small>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="rol" class=" col-sm-2 col-form-label">Rol</label>
+					<div class="col-sm-6">
+						<select class="form-control" th:field="*{rol.idRol}">
+							<option th:each="r: ${listaRoles}" th:value="${r.idRol}"
+								th:text="${r.nombreRol}"
+								th:selected="(${r.idRol} == *{rol.idRol})"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="file" class="col-sm-2 col-form-label ">Foto del
+						usuario:</label>
+					<div class="col-sm-6">
+						<input type="file" name="file" class="form-control"
+							th:text="${usuario.fotoUsuario}" required="required" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-6" align="center">
+						<input type="submit" value="Registrar" class="btn btn-primary" />
+
+						<a href="/usuarios/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+				<div>
+					<p th:text="${mensaje}" class="text-danger"></p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

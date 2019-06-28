@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/estados/nuevo}" id="add-row" type="button"
+				class="btn btn-primary">Nuevo</a>
+		</div>
+		<div>
+			<form th:action="@{/estados/buscar}" method="post"
+				th:object="${estado}">
+				<div class="form-group">
+
+					<label for="estado">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{descripcionEstado}" id="estado"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/estados/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-info mb-3">Reporte de
+				Estados</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-dark mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Descripcion de estado</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="estado-list">
+							<tr th:each="estado:${listaEstados}">
+								<td th:text="${estado.idEstado}"></td>
+								<td th:text="${estado.descripcionEstado}"></td>
+								<td align="center"><a
+									th:href="@{/estados/eliminar?id=}+${estado.idEstado}"> <span
+										class="glyphicon glyphicon-trash"></span>
+								</a></td>
+								<td align="center"><a
+									th:href="@{'/estados/detalle/' + ${estado.idEstado}}"><span
+										class="glyphicon glyphicon-pencil"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<p th:text="${mensaje}" class="text-success"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

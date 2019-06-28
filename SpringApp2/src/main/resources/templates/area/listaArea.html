@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/areas/nuevo}" id="add-row" type="button"
+				class="btn btn-primary">Nuevo</a>
+		</div>
+		<div>
+			<form th:action="@{/areas/buscar}" method="post" th:object="${area}">
+				<div class="form-group">
+
+					<label for="area">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{nombreArea}" id="area"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/areas/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-info mb-3">Reporte de
+				Áreas</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-dark mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombre de Área</th>
+								<th>Número de personal</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="area-list">
+							<tr th:each="area:${listaAreas}">
+								<td th:text="${area.idArea}"></td>
+								<td th:text="${area.nombreArea}"></td>
+								<td th:text="${area.numeroPersonal}"></td>
+								<td align="center"><a
+									th:href="@{/areas/eliminar?id=}+${area.idArea}"> <span
+										class="glyphicon glyphicon-trash"></span>
+								</a></td>
+								<td align="center"><a
+									th:href="@{'/areas/detalle/' + ${area.idArea}}"><span
+										class="glyphicon glyphicon-pencil"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<p th:text="${mensaje}" class="text-success"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

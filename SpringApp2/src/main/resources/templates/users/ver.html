@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Users</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>Código</td>
+								<td th:text="${users.id}"></td>
+							</tr>
+							<tr>
+								<td>Nombre de Usuario</td>
+								<td th:text="${users.nombreUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Edad</td>
+								<td th:text="${users.edadUsuario}"></td>
+							</tr>
+							<tr>
+								<td>DNI</td>
+								<td th:text="${users.dniUsuario}"></td>
+							</tr>
+
+							<tr>
+								<td>Foto del Usuario</td>
+								<td><img th:if="${#strings.length(users.fotoUsuario)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/users/uploads/' + ${users.fotoUsuario}}"
+									th:alt="${users.fotoUsuario}" /></td>
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/users/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

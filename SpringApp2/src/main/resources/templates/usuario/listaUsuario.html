@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div align="right">
+			<a th:href="@{/usuarios/nuevo}" id="add-row" type="button"
+				class="btn btn-primary">Nuevo</a>
+		</div>
+		<div>
+			<form th:action="@{/usuarios/buscar}" method="post"
+				th:object="${usuario}">
+				<div class="form-group">
+
+					<label for="usuario">Buscar:</label> <input type="text"
+						class="form-control" th:field="*{nombreUsuario}" id="usuario"></input>
+					<div align="right">
+						<button type="submit" class="btn btn-success">Aceptar</button>
+						<a href="/usuarios/listar" class="btn btn-danger">Cancelar</a>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+
+		<div class="card">
+			<div class="card-header text-white bg-info mb-3">Reporte de
+				Usuarios</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+						<thead class="bg-info mb-3 text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombe de Usuario</th>
+								<th>Edad</th>
+								<th>Email</th>
+								<th>DNI</th>
+								<th>Rol</th>
+								<th align="center">Operación</th>
+								<th align="center">Operación</th>
+							</tr>
+						</thead>
+						<tbody id="usuario-list">
+							<tr th:each="usuario:${listaUsuarios}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/usuarios/verusu/} + ${usuario.idUsuario}"
+									th:text="${usuario.idUsuario}"></a>
+								<td th:text="${usuario.nombreUsuario}"></td>
+								<td th:text="${usuario.edadUsuario}"></td>
+								<td th:text="${usuario.emailUsuario}"></td>
+								<td th:text="${usuario.dniUsuario}"></td>
+								<td th:text="${usuario.rol.nombreRol}"></td>
+
+								<td align="center"><a
+									th:href="@{/usuarios/eliminar?id=}+${usuario.idUsuario}"> <span
+										class="glyphicon glyphicon-trash"></span></a></td>
+								<td align="center"><a
+									th:href="@{'/usuarios/modificar/' + ${usuario.idUsuario}}"><span
+										class="glyphicon glyphicon-pencil"></span></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<p th:text="${mensaje}" class="text-success"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8"></meta>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-white bg-dark mb-3">Reporte de
+				Informes</div>
+			<div class="card-body">
+
+				<div class="table-responsive">
+					<table class="table table-white">
+
+						<tbody>
+							<tr>
+								<td>CÓDIGO</td>
+								<td th:text="${informe.idInforme}"></td>
+							</tr>
+							<tr>
+								<td>Proyecto</td>
+								<td th:text="${informe.proyecto.nombreProyecto}"></td>
+							</tr>
+							<tr>
+								<td>Encargado</td>
+								<td th:text="${informe.proyecto.usuario.nombreUsuario}"></td>
+							</tr>
+							<tr>
+								<td>Descripción del informe</td>
+								<td th:text="${informe.descripcionInforme}"></td>
+							</tr>
+							
+							<tr>
+								<td>Fecha del informe</td>
+								<td
+									th:text="${#dates.format(informe.fechaInforme,'dd/MM/yyyy')}"></td>
+							</tr>
+							<tr>
+								<td>Estado</td>
+								<td th:text="${informe.estado.descripcionEstado}"></td>
+							</tr>
+
+							<tr>
+								<td>Anexo del informe</td>
+								<td><img th:if="${#strings.length(informe.fotoInforme)> 0}"
+									class="img-thumbnail rounded float-left"
+									style="max-width: 50%;"
+									th:src="@{'/informes/uploads/' + ${informe.fotoInforme}}" th:alt="${informe.fotoInforme}" /></td>
+							</tr>
+							
+							
+							<tr>
+								<td>Descripción del informe</td>
+								<td th:text="${informe.proyecto.producto.nombreProducto}"></td>
+							</tr>
+							
+							
+							<tr>
+								<td>Descripción del informe</td>
+								<td th:text="${informe.proyecto.area.nombreArea}"></td>
+							</tr>
+							
+							
+							
+
+						</tbody>
+
+					</table>
+
+					<a th:href="@{/informes/listar}" type="button"
+						class="btn btn-primary k"> <span
+						class="glyphicon glyphicon-circle-arrow-left"></span> Volver
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
